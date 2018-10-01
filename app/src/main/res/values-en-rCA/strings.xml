@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AndroidLabs</string>
+    <string name="hello_message">Ahoy!</string>
+    <string name="ButtonText">Button am I</string>
+    <string name="title_activity_login">Sign in or else</string>
+    <string name="login">login or else</string>
+    <string name="password">password123</string>
+    <string name="whatDoesThisDo">Where am I?</string>
+    <string name="loginHint">Username</string>
+    <string name="radioButton">Button of Radio</string>
+    <string name="checkBox">Box of Check</string>
+    <string name="loginButton">LOGIN!!!!</string>
+    <string name="flag">description!!!!!</string>
+
+    <string name="dialog_message">End activity now?</string>
+    <string name="dialog_title">End Activity</string>
+    <string name="ok">Continue</string>
+    <string name="cancel">Exit</string>
+</resources>
