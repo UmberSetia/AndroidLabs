@@ -13,9 +13,9 @@ import android.widget.EditText;
 public class LoginActivity extends Activity {
     protected static final String ACTIVITY_NAME = "LoginActivity";
 
-    private Button button;
-    private SharedPreferences pref;
-    private EditText email;
+    protected Button button;
+    protected SharedPreferences pref;
+    protected EditText email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

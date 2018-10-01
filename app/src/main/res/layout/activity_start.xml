@@ -23,4 +23,11 @@
         android:onClick="clickHandler"
         android:text="@string/ButtonText" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="startChat"
+        android:text="@string/startChat" />
+
 </LinearLayout>
