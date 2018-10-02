@@ -2,6 +2,7 @@ package com.example.umbersetia.androidlabs;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -81,7 +82,17 @@ public class ListItemsActivity extends Activity {
 
                             }
                         });
-                builder.show();
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+                if (checkBox.isChecked()) {
+                    alertDialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(true);
+                    alertDialog.getButton(Dialog.BUTTON_NEGATIVE).setEnabled(true);
+                }else{
+                    alertDialog.cancel();
+                }
+
+                checkBox.toggle();
+
             }
         });
 
