@@ -16,4 +16,7 @@
     <string name="dialog_title">Finish Activity</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="hereIsMyResponse">Here is my response</string>
+    <string name="switchOn">Switch is on</string>
+    <string name="switchOff">Switch is off</string>
 </resources>

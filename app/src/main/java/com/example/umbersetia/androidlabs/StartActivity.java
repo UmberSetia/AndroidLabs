@@ -12,19 +12,6 @@ public class StartActivity extends Activity {
     protected static final String ACTIVITY_NAME = "StartActivity";
 
     private Button button;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
-        Log.i(ACTIVITY_NAME, "In onCreate()");
-
-        button = findViewById(R.id.button);
-    }
-
-    protected void clickHandler(View view){
-        Intent intent = new Intent(StartActivity.this, ListItemsActivity.class);
-        startActivityForResult(intent, 50);
-    }
 
     protected void onActivityResult(int requestCode, int responseCode, Intent data){
         if (requestCode == 50) {
@@ -33,8 +20,28 @@ public class StartActivity extends Activity {
         if (requestCode == Activity.RESULT_OK){
             String messagePassed = data.getStringExtra("Response");
             Toast toast = Toast.makeText(this, messagePassed, Toast.LENGTH_LONG);
+            toast.show();
         }
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_start);
+        Log.i(ACTIVITY_NAME, "In onCreate()");
+
+        button = findViewById(R.id.button);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(StartActivity.this, ListItemsActivity.class);
+                startActivityForResult(intent, 50);
+                onActivityResult(50,50,intent);
+            }
+        });
+    }
+
 
     @Override
     protected void onResume(){

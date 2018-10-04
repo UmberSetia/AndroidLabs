@@ -17,4 +17,7 @@
     <string name="dialog_title">End Activity</string>
     <string name="ok">Continue</string>
     <string name="cancel">Exit</string>
+    <string name="hereIsMyResponse">My response is here!!!</string>
+    <string name="switchOn">Switch is on</string>
+    <string name="switchOff">Switch is off</string>
 </resources>

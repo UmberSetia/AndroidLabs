@@ -45,25 +45,28 @@ public class ListItemsActivity extends Activity {
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                CharSequence text;
+                //CharSequence text;
                 int duration;
-                if (isChecked == true){
-                    text = "Switch is On";
+                if (isChecked){
+                    //text = "@string/switchOn";
                     duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(ListItemsActivity.this, R.string.switchOn, duration);
+                    toast.show();
                 } else {
-                    text = "Switch is Off";
+                    //text = "@string/switchOff";
                     duration = Toast.LENGTH_LONG;
+                    Toast toast = Toast.makeText(ListItemsActivity.this, R.string.switchOff, duration);
+                    toast.show();
                 }
-
-                Toast toast = Toast.makeText(ListItemsActivity.this, text, duration);
-                toast.show();
             }
         });
 
         checkBox = findViewById(R.id.checkBox);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (checkBox.isChecked()){
                 AlertDialog.Builder builder = new AlertDialog.Builder(ListItemsActivity.this)
                         .setMessage(R.string.dialog_message)
                         .setTitle(R.string.dialog_title)
@@ -71,7 +74,7 @@ public class ListItemsActivity extends Activity {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 Intent resultIntent = new Intent();
-                                resultIntent.putExtra("Response","Here is my response");
+                                resultIntent.putExtra("Response","@string/hereIsMyResponse");
                                 setResult(Activity.RESULT_OK,resultIntent);
                                 finish();
                             }
@@ -79,22 +82,13 @@ public class ListItemsActivity extends Activity {
                         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
-
+                            checkBox.setChecked(false);
                             }
                         });
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
-                if (checkBox.isChecked()) {
-                    alertDialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(true);
-                    alertDialog.getButton(Dialog.BUTTON_NEGATIVE).setEnabled(true);
-                }else{
-                    alertDialog.cancel();
-                }
-
-                checkBox.toggle();
-
             }
-        });
+        }});
 
     }
 

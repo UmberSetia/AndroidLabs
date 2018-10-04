@@ -1,2 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">AndroidLab</string>
+    <string name="hello_message">Bonjour tout la monde!</string>
+    <string name="ButtonText">Je suis un button</string>
+    <string name="title_activity_login">Se connecter</string>
+    <string name="login">s\'identifier</string>
+    <string name="password">mote de passe</string>
+    <string name="whatDoesThisDo">Qu\'est-ce que cela fait?</string>
+    <string name="loginHint">identifiant</string>
+    <string name="radioButton">bouton radio</string>
+    <string name="checkBox">case à cocher</string>
+    <string name="loginButton">s\'identifier</string>
+    <string name="flag">la description</string>
+
+    <string name="dialog_message">Aimeriez-vous terminer l\'activité</string>
+    <string name="dialog_title">Terminer l\'activité</string>
+    <string name="ok">D\'accord</string>
+    <string name="cancel">Annuler</string>
+    <string name="hereIsMyResponse">Voice ma réponse</string>
+    <string name="switchOn">interrupteur est sur</string>
+    <string name="switchOff">interrupteur est éteint</string>
+</resources>
