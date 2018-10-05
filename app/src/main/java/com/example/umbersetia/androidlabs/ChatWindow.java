@@ -1,5 +1,6 @@
 package com.example.umbersetia.androidlabs;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,9 +15,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-public class ChatWindow extends AppCompatActivity {
+public class ChatWindow extends Activity {
     protected static final String ACTIVITY_NAME = "ChatWindow";
-    protected ListView listView;
+    private ListView listView;
     protected EditText editText;
     protected Button sendButton;
     protected ArrayList<String> chatMessages;
@@ -26,13 +27,17 @@ public class ChatWindow extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_window);
-        Log.i(ACTIVITY_NAME, "In onCreate");
+
         listView.findViewById(R.id.chatView);
         editText.findViewById(R.id.editText);
         sendButton.findViewById(R.id.sendButton);
 
+        Log.i(ACTIVITY_NAME, "In onCreate");
+        chatMessages = new ArrayList<>();
+
         messageAdapter = new ChatAdapter(this);
         listView.setAdapter(messageAdapter);
+
     }
 
     @Override
@@ -81,7 +86,8 @@ public class ChatWindow extends AppCompatActivity {
         }
 
         public int getCount() {
-            return chatMessages.size();
+
+            return (chatMessages == null)?0 : chatMessages.size();
         }
 
         public String getItem(int position){
