@@ -1,108 +1,89 @@
 package com.example.umbersetia.androidlabs;
 
+import android.app.Activity;
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-public class ChatWindow extends AppCompatActivity {
+
+public class ChatWindow extends Activity {
     protected static final String ACTIVITY_NAME = "ChatWindow";
-    protected ListView listView;
-    protected EditText editText;
-    protected Button sendButton;
-    protected ArrayList<String> chatMessages;
-    protected ChatAdapter messageAdapter;
+    private ListView listView;
+    private EditText editText;
+    private ArrayList<String> chatMessages = new ArrayList<>();
+    private ChatAdapter messageAdapter;
+    private TextView message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_window);
         Log.i(ACTIVITY_NAME, "In onCreate");
-        listView.findViewById(R.id.chatView);
-        editText.findViewById(R.id.editText);
-        sendButton.findViewById(R.id.sendButton);
+
+        listView = findViewById(R.id.chatView);
+        editText = findViewById(R.id.editText);
 
         messageAdapter = new ChatAdapter(this);
         listView.setAdapter(messageAdapter);
-    }
 
-    @Override
-    protected void onResume(){
-        super.onResume();
-        Log.i(ACTIVITY_NAME, "In onResume");
-    }
-
-    @Override
-    protected void onStart(){
-        super.onStart();
-        Log.i(ACTIVITY_NAME, "In onStart");
-    }
-
-    @Override
-    protected void onPause(){
-        super.onPause();
-        Log.i(ACTIVITY_NAME, "In onPause");
-    }
-
-    @Override
-    protected void onStop(){
-        super.onStop();
-        Log.i(ACTIVITY_NAME, "In onStop");
-    }
-
-    @Override
-    protected void onDestroy(){
-        super.onDestroy();
-        Log.i(ACTIVITY_NAME, "In onDestroy");
     }
 
     protected void onSendClick(View view){
-        int iteration = 0;
-        chatMessages.set(iteration++,editText.getText().toString());
+        Log.i(ACTIVITY_NAME, "Send was pressed");
 
-        messageAdapter.notifyDataSetChanged();
+            chatMessages.add(editText.getText().toString());
 
-        editText.setText("");
+            messageAdapter.notifyDataSetChanged();
+
+            editText.setText("");
+
     }
 
-    class ChatAdapter extends ArrayAdapter<String> {
+    private class ChatAdapter extends ArrayAdapter<String> {
 
         public ChatAdapter(Context ctx){
             super(ctx,0);
         }
 
+
         public int getCount() {
             return chatMessages.size();
         }
 
+
         public String getItem(int position){
+            Log.i(ACTIVITY_NAME, "In getItem");
             return chatMessages.get(position);
         }
 
+        @Override
         public View getView(int position, View convertView, ViewGroup parent){
+
             LayoutInflater inflater = ChatWindow.this.getLayoutInflater();
             View result = null;
             if (position%2 == 0){
+                System.out.println("Here" + position);
                 result = inflater.inflate(R.layout.chat_row_incoming, null);
             } else {
+                System.out.println("There" + position);
+
                 result = inflater.inflate(R.layout.chat_row_outgoing, null);
             }
 
-            TextView message = (TextView)result.findViewById(R.id.message_text);
+            message = result.findViewById(R.id.message_text);
             message.setText(getItem(position));
 
             return result;
         }
 
+        @Override
         public long getItemId(int position){
             return position;
         }

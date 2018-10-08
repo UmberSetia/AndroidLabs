@@ -2,6 +2,7 @@ package com.example.umbersetia.androidlabs;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,7 +18,7 @@ import android.widget.Toast;
 
 
 public class ListItemsActivity extends Activity {
-    protected static final String ACTIVITY_NAME = "LoginActivity";
+    protected static final String ACTIVITY_NAME = "ListItemsActivity";
 
     protected ImageButton imageButton;
     protected Switch aSwitch;
@@ -44,46 +45,51 @@ public class ListItemsActivity extends Activity {
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                CharSequence text;
+                //CharSequence text;
                 int duration;
-                if (isChecked == true){
-                    text = "Switch is On";
+                if (isChecked){
+                    //text = "@string/switchOn";
                     duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(ListItemsActivity.this, R.string.switchOn, duration);
+                    toast.show();
                 } else {
-                    text = "Switch is Off";
+                    //text = "@string/switchOff";
                     duration = Toast.LENGTH_LONG;
+                    Toast toast = Toast.makeText(ListItemsActivity.this, R.string.switchOff, duration);
+                    toast.show();
                 }
-
-                Toast toast = Toast.makeText(ListItemsActivity.this, text, duration);
-                toast.show();
             }
         });
 
         checkBox = findViewById(R.id.checkBox);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ListItemsActivity.this)
-                        .setMessage(R.string.dialog_message)
-                        .setTitle(R.string.dialog_title)
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                Intent resultIntent = new Intent();
-                                resultIntent.putExtra("Response","Here is my response");
-                                setResult(Activity.RESULT_OK,resultIntent);
-                                finish();
-                            }
-                        })
-                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
+                if (checkBox.isChecked()){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ListItemsActivity.this);
 
-                            }
-                        });
-                builder.show();
-            }
-        });
+                            builder.setMessage(R.string.dialog_message)
+                            .setTitle(R.string.dialog_title)
+                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent resultIntent = new Intent();
+                                    resultIntent.putExtra("Response","Here is my Response");
+                                    setResult(Activity.RESULT_OK,resultIntent);
+                                    finish();
+                                }
+                            })
+                            .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                    checkBox.setChecked(false);
+                                }
+                            }).show();
+//                    AlertDialog alertDialog = builder.create();
+//                    alertDialog.show();
+                }
+            }});
 
     }
 

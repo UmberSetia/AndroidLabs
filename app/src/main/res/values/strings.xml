@@ -17,6 +17,9 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
 
+    <string name="hereIsMyResponse">Here is my response</string>
+    <string name="switchOn">Switch On</string>
+    <string name="switchOff">Switch Off</string>
     <string name="startChat">Start Chat</string>
     <string name="sendButton">Send</string>
 </resources>

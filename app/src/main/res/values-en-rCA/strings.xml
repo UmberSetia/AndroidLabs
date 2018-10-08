@@ -20,4 +20,7 @@
 
     <string name="startChat">Begin Chat</string>
     <string name="sendButton">Send the input</string>
+    <string name="switchOn">The switch is on</string>
+    <string name="switchOff">The switch is off</string>
+    <string name="hereIsMyResponse">Response</string>
 </resources>

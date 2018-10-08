@@ -26,14 +26,15 @@ public class StartActivity extends Activity {
     protected void clickHandler(View view){
         Intent intent = new Intent(StartActivity.this, ListItemsActivity.class);
         startActivityForResult(intent, 50);
-
+        onActivityResult(50,50,intent);
     }
 
     protected void onActivityResult(int requestCode, int responseCode, Intent data){
         if (requestCode == 50) {
             Log.i(ACTIVITY_NAME, "Returned to StartActivity.onActivityResult");
         }
-        if (requestCode == Activity.RESULT_OK){
+        Log.i(ACTIVITY_NAME,"Display Toast" + Activity.RESULT_OK);
+        if (responseCode == Activity.RESULT_OK){
             String messagePassed = data.getStringExtra("Response");
             Toast toast = Toast.makeText(this, messagePassed, Toast.LENGTH_LONG);
             toast.show();
