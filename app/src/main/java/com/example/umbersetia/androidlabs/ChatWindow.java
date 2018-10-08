@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
-<<<<<<< HEAD
 
 public class ChatWindow extends Activity {
     protected static final String ACTIVITY_NAME = "ChatWindow";
@@ -21,42 +20,18 @@ public class ChatWindow extends Activity {
     private ArrayList<String> chatMessages = new ArrayList<>();
     private ChatAdapter messageAdapter;
     private TextView message;
-=======
-public class ChatWindow extends Activity {
-    protected static final String ACTIVITY_NAME = "ChatWindow";
-    private ListView listView;
-    protected EditText editText;
-    protected Button sendButton;
-    protected ArrayList<String> chatMessages;
-    protected ChatAdapter messageAdapter;
->>>>>>> d9cfcf85f1fe6200ff07a54a090e0af3203522a3
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_window);
-<<<<<<< HEAD
         Log.i(ACTIVITY_NAME, "In onCreate");
 
         listView = findViewById(R.id.chatView);
         editText = findViewById(R.id.editText);
-=======
-
-        listView.findViewById(R.id.chatView);
-        editText.findViewById(R.id.editText);
-        sendButton.findViewById(R.id.sendButton);
->>>>>>> d9cfcf85f1fe6200ff07a54a090e0af3203522a3
-
-        Log.i(ACTIVITY_NAME, "In onCreate");
-        chatMessages = new ArrayList<>();
 
         messageAdapter = new ChatAdapter(this);
         listView.setAdapter(messageAdapter);
-<<<<<<< HEAD
-=======
-
-    }
->>>>>>> d9cfcf85f1fe6200ff07a54a090e0af3203522a3
 
     }
 
@@ -79,8 +54,7 @@ public class ChatWindow extends Activity {
 
 
         public int getCount() {
-
-            return (chatMessages == null)?0 : chatMessages.size();
+            return chatMessages.size();
         }
 
 
