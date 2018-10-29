@@ -2,6 +2,7 @@ package com.example.umbersetia.androidlabs;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,6 +34,10 @@ public class ChatWindow extends Activity {
         messageAdapter = new ChatAdapter(this);
         listView.setAdapter(messageAdapter);
 
+        ChatDatabaseHelper chatDatabaseHelper = new ChatDatabaseHelper(this);
+        SQLiteDatabase db = chatDatabaseHelper.getWritableDatabase();
+
+        Cursor c = db.query()
     }
 
     protected void onSendClick(View view){
