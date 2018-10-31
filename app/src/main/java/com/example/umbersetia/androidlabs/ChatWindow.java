@@ -1,7 +1,10 @@
 package com.example.umbersetia.androidlabs;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,15 +20,38 @@ public class ChatWindow extends Activity {
     protected static final String ACTIVITY_NAME = "ChatWindow";
     private ListView listView;
     private EditText editText;
-    private ArrayList<String> chatMessages = new ArrayList<>();
+    public ArrayList<String> chatMessages = new ArrayList<>();
     private ChatAdapter messageAdapter;
     private TextView message;
+    public SQLiteDatabase db;
+    private ContentValues cValues;
+    private ChatDatabaseHelper chatDatabaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_window);
         Log.i(ACTIVITY_NAME, "In onCreate");
+
+        cValues = new ContentValues();
+
+        chatDatabaseHelper = new ChatDatabaseHelper(ChatWindow.this);
+        db = chatDatabaseHelper.getWritableDatabase();
+
+        Cursor c = db.rawQuery("SELECT Message FROM Messages", null);
+
+        int columnIndex = c.getColumnIndex("Message");
+
+        c.moveToFirst();
+        while (!c.isAfterLast()){
+
+            chatMessages.add(c.getString(columnIndex));
+            Log.i(ACTIVITY_NAME, "SQL_MESSAGE: " + c.getString(c.getColumnIndex(ChatDatabaseHelper.KEY_MESSAGE)));
+            Log.i(ACTIVITY_NAME, "Cursor's column count = " + c.getColumnCount());
+            Log.i(ACTIVITY_NAME, "Column name = " + c.getColumnName(columnIndex));
+
+            c.moveToNext();
+        }
 
         listView = findViewById(R.id.chatView);
         editText = findViewById(R.id.editText);
@@ -38,12 +64,21 @@ public class ChatWindow extends Activity {
     protected void onSendClick(View view){
         Log.i(ACTIVITY_NAME, "Send was pressed");
 
-            chatMessages.add(editText.getText().toString());
+        chatMessages.add(editText.getText().toString());
 
-            messageAdapter.notifyDataSetChanged();
+        cValues.put("Message", editText.getText().toString());
+        db.insert(chatDatabaseHelper.TABLE_NAME,null,cValues);
 
-            editText.setText("");
+        messageAdapter.notifyDataSetChanged();
+        editText.setText("");
 
+    }
+
+    protected void onDestroy(){
+        super.onDestroy();
+        if (db !=null){
+            db.close();
+        }
     }
 
     private class ChatAdapter extends ArrayAdapter<String> {
@@ -69,10 +104,8 @@ public class ChatWindow extends Activity {
             LayoutInflater inflater = ChatWindow.this.getLayoutInflater();
             View result = null;
             if (position%2 == 0){
-                System.out.println("Here" + position);
                 result = inflater.inflate(R.layout.chat_row_incoming, null);
             } else {
-                System.out.println("There" + position);
 
                 result = inflater.inflate(R.layout.chat_row_outgoing, null);
             }
