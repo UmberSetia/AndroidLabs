@@ -20,7 +20,11 @@ public class ChatWindow extends Activity {
     protected static final String ACTIVITY_NAME = "ChatWindow";
     private ListView listView;
     private EditText editText;
+<<<<<<< HEAD
     public ArrayList<String> chatMessages = new ArrayList<>();
+=======
+    public ArrayList<String> chatMessages = new ArrayList<String>();
+>>>>>>> 5da5b674b949aac7388ef486fe6394535ff33118
     private ChatAdapter messageAdapter;
     private TextView message;
     public SQLiteDatabase db;
@@ -35,7 +39,11 @@ public class ChatWindow extends Activity {
 
         cValues = new ContentValues();
 
+<<<<<<< HEAD
         chatDatabaseHelper = new ChatDatabaseHelper(ChatWindow.this);
+=======
+        chatDatabaseHelper = new ChatDatabaseHelper(this);
+>>>>>>> 5da5b674b949aac7388ef486fe6394535ff33118
         db = chatDatabaseHelper.getWritableDatabase();
 
         Cursor c = db.rawQuery("SELECT Message FROM Messages", null);
@@ -44,8 +52,11 @@ public class ChatWindow extends Activity {
 
         c.moveToFirst();
         while (!c.isAfterLast()){
+<<<<<<< HEAD
 
             chatMessages.add(c.getString(columnIndex));
+=======
+>>>>>>> 5da5b674b949aac7388ef486fe6394535ff33118
             Log.i(ACTIVITY_NAME, "SQL_MESSAGE: " + c.getString(c.getColumnIndex(ChatDatabaseHelper.KEY_MESSAGE)));
             Log.i(ACTIVITY_NAME, "Cursor's column count = " + c.getColumnCount());
             Log.i(ACTIVITY_NAME, "Column name = " + c.getColumnName(columnIndex));
@@ -66,11 +77,19 @@ public class ChatWindow extends Activity {
 
         chatMessages.add(editText.getText().toString());
 
+<<<<<<< HEAD
         cValues.put("Message", editText.getText().toString());
         db.insert(chatDatabaseHelper.TABLE_NAME,null,cValues);
 
         messageAdapter.notifyDataSetChanged();
         editText.setText("");
+=======
+            cValues.put("Message", editText.getText().toString());
+            db.insert(chatDatabaseHelper.TABLE_NAME,null,cValues);
+
+            messageAdapter.notifyDataSetChanged();
+            editText.setText("");
+>>>>>>> 5da5b674b949aac7388ef486fe6394535ff33118
 
     }
 
