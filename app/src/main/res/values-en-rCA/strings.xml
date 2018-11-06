@@ -23,4 +23,7 @@
     <string name="switchOn">The switch is on</string>
     <string name="switchOff">The switch is off</string>
     <string name="hereIsMyResponse">Response</string>
+
+    <string name="connection_error">Connection Error</string>
+    <string name="xml_error">XML Error</string>
 </resources>

@@ -22,4 +22,7 @@
     <string name="switchOff">Interrupteur est éteint</string>
     <string name="startChat">Démarrer la Discussion</string>
     <string name="sendButton">Envoyer</string>
+
+    <string name="connection_error">Erreur de Connexion</string>
+    <string name="xml_error">Erreur de XML</string>
 </resources>
