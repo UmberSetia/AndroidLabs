@@ -25,4 +25,5 @@
 
     <string name="connection_error">Erreur de Connexion</string>
     <string name="xml_error">Erreur de XML</string>
+    <string name="startWeatherForecast">Météo</string>
 </resources>

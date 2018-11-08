@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WeatherForecast">
+    tools:context=".WeatherForecast"
+    android:orientation="vertical">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="200dp"
-        android:layout_height="200dp"
-        tools:src="@tools:sample/backgrounds/scenic" />
+        android:layout_height="200dp" />
 
     <TextView
         android:id="@+id/currentTemp"
@@ -30,10 +37,11 @@
         android:layout_height="wrap_content"
         android:text="TextView" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
+    <TextView
+        android:id="@+id/windSpeed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible" />
-</android.support.constraint.ConstraintLayout>
+        android:text="TextView" />
+
+
+</LinearLayout>

@@ -23,6 +23,7 @@
     <string name="startChat">Start Chat</string>
     <string name="sendButton">Send</string>
 
+    <string name="startWeatherForecast">Weather</string>
     <string name="connection_error">Connection Error</string>
     <string name="xml_error">XML Error</string>
 </resources>
