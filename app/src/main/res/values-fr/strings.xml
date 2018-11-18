@@ -26,4 +26,7 @@
     <string name="connection_error">Erreur de Connexion</string>
     <string name="xml_error">Erreur de XML</string>
     <string name="startWeatherForecast">Météo</string>
+    <string name="DELETE_THIS_MESSAGE">SUPPRIMER CE MESSAGE</string>
+    <string name="id_hint">Identifiant=</string>
+    <string name="message_here">MessageIci</string>
 </resources>

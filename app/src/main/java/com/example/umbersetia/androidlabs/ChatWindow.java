@@ -6,10 +6,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -20,12 +23,15 @@ public class ChatWindow extends Activity {
     protected static final String ACTIVITY_NAME = "ChatWindow";
     private ListView listView;
     private EditText editText;
-    public ArrayList<String> chatMessages = new ArrayList<String>();
+    public ArrayList<String> chatMessages = new ArrayList<>();
     private ChatAdapter messageAdapter;
     private TextView message;
     public SQLiteDatabase db;
     private ContentValues cValues;
     private ChatDatabaseHelper chatDatabaseHelper;
+    public Cursor c;
+
+    public Boolean frameLayoutExists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +39,35 @@ public class ChatWindow extends Activity {
         setContentView(R.layout.activity_chat_window);
         Log.i(ACTIVITY_NAME, "In onCreate");
 
+        View frameLayout = findViewById(R.id.frameLayout);
+        final boolean iAmTablet = (frameLayout != null);
+
         cValues = new ContentValues();
 
         chatDatabaseHelper = new ChatDatabaseHelper(this);
         db = chatDatabaseHelper.getWritableDatabase();
 
-        Cursor c = db.rawQuery("SELECT Message FROM Messages", null);
+        loadListView();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                Bundle infoToPass = new Bundle();
+                infoToPass.putString("Message","Message 1");
+                infoToPass.putLong("ID", messageAdapter.getItemId(position));
+
+                if (iAmTablet){
+                    MessageDetails messageFragment = new MessageDetails();
+                    android.app.FragmentManager fm = getFragmentManager();
+                    android.app.FragmentTransaction ftrans = fm.beginTransaction();
+                    ftrans.replace(R.id.chatView,messageFragment);
+                }
+            }
+        });
+    }
+
+    private void loadListView(){
+        c = db.rawQuery("SELECT Message,ID FROM Messages", null);
 
         int columnIndex = c.getColumnIndex("Message");
 
@@ -57,6 +86,11 @@ public class ChatWindow extends Activity {
         messageAdapter = new ChatAdapter(this);
         listView.setAdapter(messageAdapter);
 
+    }
+
+    public void deleteMessage(long id){
+        db.delete(chatDatabaseHelper.TABLE_NAME,chatDatabaseHelper.KEY_ID + "=" + id,null);
+        loadListView();
     }
 
     protected void onSendClick(View view){
@@ -95,11 +129,8 @@ public class ChatWindow extends Activity {
             LayoutInflater inflater = ChatWindow.this.getLayoutInflater();
             View result = null;
             if (position%2 == 0){
-                System.out.println("Here" + position);
                 result = inflater.inflate(R.layout.chat_row_incoming, null);
             } else {
-                System.out.println("There" + position);
-
                 result = inflater.inflate(R.layout.chat_row_outgoing, null);
             }
 
@@ -111,7 +142,10 @@ public class ChatWindow extends Activity {
 
         @Override
         public long getItemId(int position){
-            return position;
+            c.moveToPosition(position);
+
+            return c.getInt(c.getColumnIndex(ChatDatabaseHelper.KEY_ID));
         }
+
     }
 }
