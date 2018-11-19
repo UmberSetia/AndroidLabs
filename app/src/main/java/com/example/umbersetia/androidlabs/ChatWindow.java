@@ -3,6 +3,7 @@ package com.example.umbersetia.androidlabs;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class ChatWindow extends Activity {
     private ContentValues cValues;
     private ChatDatabaseHelper chatDatabaseHelper;
     public Cursor c;
+    final int REQUEST_CODE = 10;
 
     public Boolean frameLayoutExists;
 
@@ -53,14 +55,21 @@ public class ChatWindow extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
                 Bundle infoToPass = new Bundle();
-                infoToPass.putString("Message","Message 1");
+                infoToPass.putString("Message",message.getText().toString());
                 infoToPass.putLong("ID", messageAdapter.getItemId(position));
 
                 if (iAmTablet){
-                    MessageDetails messageFragment = new MessageDetails();
+                    MessageFragment messageFragment = new MessageFragment();
+                    messageFragment.isATablet = true;
                     android.app.FragmentManager fm = getFragmentManager();
                     android.app.FragmentTransaction ftrans = fm.beginTransaction();
                     ftrans.replace(R.id.chatView,messageFragment);
+                    ftrans.addToBackStack("");
+                    ftrans.commit();
+                } else {
+                    Intent intent = new Intent(ChatWindow.this,MessageDetails.class);
+                    intent.putExtras(infoToPass);
+                    startActivityForResult(intent,REQUEST_CODE);
                 }
             }
         });
@@ -91,6 +100,14 @@ public class ChatWindow extends Activity {
     public void deleteMessage(long id){
         db.delete(chatDatabaseHelper.TABLE_NAME,chatDatabaseHelper.KEY_ID + "=" + id,null);
         loadListView();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode == REQUEST_CODE && resultCode == 20){
+            long id = data.getLongExtra("ID",0);
+            this.deleteMessage(id);
+        }
     }
 
     protected void onSendClick(View view){
