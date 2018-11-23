@@ -30,6 +30,9 @@
         <activity android:name=".ListItemsActivity" />
         <activity android:name=".ChatWindow" />
         <activity android:name=".WeatherForecast"></activity>
+        <activity android:name=".MessageDetails"></activity>
     </application>
+
+    <supports-screens android:requiresSmallestWidthDp="600"/>
 
 </manifest>

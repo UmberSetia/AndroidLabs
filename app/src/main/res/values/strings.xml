@@ -26,4 +26,8 @@
     <string name="startWeatherForecast">Weather</string>
     <string name="connection_error">Connection Error</string>
     <string name="xml_error">XML Error</string>
+
+    <string name="message_here">Message Here</string>
+    <string name="id_hint">ID=</string>
+    <string name="delete_this_message">DELETE THIS MESSAGE</string>
 </resources>
